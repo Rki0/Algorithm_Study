@@ -1,5 +1,9 @@
-const regex = /^[1-9]+$/;
+// const regex = /abc/;
 
-if (regex.test("132")) {
-  console.log("hi");
+const regex = /abc/g;
+
+const wahtGroups = "123abc;idv 5";
+
+if (regex.test("123abc;idv 5")) {
+  console.log("찾았다!");
 }
