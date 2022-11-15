@@ -1,12 +1,3 @@
-const Three = require("./third_module");
-
-class Two {
-  constructor() {}
-
-  callThree() {
-    const three = new Three();
-    three.callOne();
-  }
+function test() {
+  console.log("나 돌아갈래~");
 }
-
-module.exports = Two;
