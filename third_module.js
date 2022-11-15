@@ -1,17 +1,13 @@
-const One = require("./연습장");
+const One = require("./module_prac");
 
-class Third {
+class Three {
   callOne() {
-    console.log("third");
-    // const one = new One();
-    // one.callTwo();
-    this.result();
-  }
-
-  result() {
     const one = new One();
-    one.callTwo();
+    one.hihi();
   }
 }
 
-module.exports = Third;
+const three = new Three();
+three.callOne();
+
+module.exports = Three;
