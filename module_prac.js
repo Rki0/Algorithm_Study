@@ -1,18 +1,29 @@
-const Third = require("./third_module");
+function solution(polynomial) {
+  const polyArr = polynomial.split(" + ");
 
-class Two {
-  callThird() {
-    console.log("two");
-    // const third = new Third();
-    // third.callOne();
-    this.twoYou();
-  }
+  let xNum = 0;
+  let num = 0;
 
-  twoYou() {
-    console.log("you can use");
-    const third = new Third();
-    third.callOne();
-  }
+  polyArr.forEach((item) => {
+    if (item.includes("x")) {
+      const xArr = item.split("x");
+      console.log(xArr);
+
+      if (item[0] === "") {
+        xNum += 1;
+      }
+
+      if (item[0] !== "") {
+        xNum += Number(xArr[0]);
+      }
+    }
+
+    if (!item.includes("x")) {
+      num += Number(item);
+    }
+  });
+
+  return `${xNum}x + ${num}`;
 }
 
-module.exports = Two;
+console.log(solution("3x + 7 + x"));
