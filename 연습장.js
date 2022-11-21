@@ -13,3 +13,5 @@ console.log(result);
 
 const result2 = myPromiseFun();
 console.log(result2);
+
+// main의 코드가 수정되었습니다.
