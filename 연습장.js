@@ -13,3 +13,5 @@ console.log(result);
 
 const result2 = myPromiseFun();
 console.log(result2);
+
+// 아니 슈밤 이제 알려주면 어떻게 하라고
