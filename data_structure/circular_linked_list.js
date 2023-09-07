@@ -187,6 +187,29 @@ class CircularLinkedList {
 
     return removed;
   }
+
+  findCircular() {
+    if (this.head === null) {
+      return false;
+    }
+
+    let rabbit = this.head.next;
+    let turtle = this.head;
+
+    while (rabbit !== null) {
+      if (rabbit === turtle) {
+        return rabbit;
+      }
+
+      if (rabbit.next) {
+        rabbit = rabbit.next.next;
+        turtle = turtle.next;
+        continue;
+      }
+
+      break;
+    }
+  }
 }
 
 const list = new CircularLinkedList();
@@ -195,3 +218,4 @@ list.push("goodbye");
 list.push("wow");
 
 console.log(list);
+console.log(list.findCircular());
