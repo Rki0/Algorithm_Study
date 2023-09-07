@@ -9,7 +9,7 @@ class CircularLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
-    this.length = 0;
+    this.size = 0;
   }
 
   push(val) {
@@ -17,15 +17,14 @@ class CircularLinkedList {
 
     if (!this.head) {
       this.head = newNode;
-      this.tail = this.head;
+      this.tail = newNode;
     } else {
-      // 맨 뒤에 추가될 새로운 노드의 next가 head를 바라보게 한다.
       newNode.next = this.head;
       this.tail.next = newNode;
       this.tail = newNode;
     }
 
-    this.length++;
+    this.size++;
 
     return this;
   }
@@ -37,21 +36,23 @@ class CircularLinkedList {
 
     let current = this.head;
     let newTail = current;
+    let count = 0;
 
-    while (current.next) {
+    while (count !== this.size - 1) {
       newTail = current;
 
       current = current.next;
+
+      count++;
     }
 
     this.tail = newTail;
 
-    // 새로운 tail의 next가 head를 바라보게 한다.
     this.tail.next = this.head;
 
-    this.length--;
+    this.size--;
 
-    if (this.length === 0) {
+    if (this.size === 0) {
       this.head = null;
       this.tail = null;
     }
@@ -68,12 +69,11 @@ class CircularLinkedList {
 
     this.head = currentHead.next;
 
-    // 현재 tail이 바라보고 있는 head를 변경된 head로 전환한다.
     this.tail.next = this.head;
 
-    this.length--;
+    this.size--;
 
-    if (this.length === 0) {
+    if (this.size === 0) {
       this.tail = null;
     }
 
@@ -85,29 +85,27 @@ class CircularLinkedList {
 
     if (!this.head) {
       this.head = newNode;
-      this.tail = this.head;
+      this.tail = newNode;
     } else {
       newNode.next = this.head;
       this.head = newNode;
-
-      // tail이 새로운 head를 바라보게 한다.
-      this.tail = this.head;
+      this.tail.next = this.head;
     }
 
-    this.length++;
+    this.size++;
 
     return this;
   }
 
   get(index) {
-    if (index < 0 || index >= this.length) {
+    if (index < 0 || index >= this.size) {
       return null;
     }
 
     let current = this.head;
     let count = 0;
 
-    // count < index로 해도 됨.
+    // 1 -2 -3
     while (count !== index) {
       current = current.next;
       count++;
@@ -117,7 +115,6 @@ class CircularLinkedList {
   }
 
   set(index, val) {
-    // get()을 활용하여 특정 위치의 node를 얻는다.
     const foundNode = this.get(index);
 
     if (foundNode) {
@@ -130,12 +127,11 @@ class CircularLinkedList {
   }
 
   insert(index, val) {
-    if (index < 0 || index >= this.length) {
+    if (index < 0 || index >= this.size) {
       return false;
     }
 
-    if (index === this.length) {
-      // boolean으로 return 값을 통일하기 위함.
+    if (index === this.size) {
       return !!this.push(val);
     }
 
@@ -143,34 +139,25 @@ class CircularLinkedList {
       return !!this.unshift(val);
     }
 
-    // 삽입할 위치의 이전 node를 찾는다.
     let prevNode = this.get(index - 1);
 
     let newNode = new Node(val);
 
-    // 방법 1.
-    // // 새 node의 next에 이전 node가 가지고 있던 next를 넘겨주고
-    // newNode.next = prevNode.next;
-
-    // // 이전 node의 next에는 새 node를 넣어준다.
-    // prevNode.next = newNode;
-
-    // 방법 2. temp 사용
     let temp = prevNode.next;
     prevNode.next = newNode;
     newNode.next = temp;
 
-    this.length++;
+    this.size++;
 
     return true;
   }
 
   remove(index) {
-    if (index < 0 || index >= this.length) {
+    if (index < 0 || index >= this.size) {
       return undefined;
     }
 
-    if (index === this.length - 1) {
+    if (index === this.size - 1) {
       return this.pop();
     }
 
@@ -183,7 +170,7 @@ class CircularLinkedList {
 
     prevNode.next = removed.next;
 
-    this.length--;
+    this.size--;
 
     return removed;
   }
@@ -213,9 +200,13 @@ class CircularLinkedList {
 }
 
 const list = new CircularLinkedList();
-list.push("hello");
-list.push("goodbye");
-list.push("wow");
+
+console.log(list.push(1));
+console.log(list.push(2));
+console.log(list.push(3));
+// console.log(list.unshift(0));
+// console.log(list.insert(1, 4));
+console.log(list.remove(1));
+console.log(list.get(1));
 
 console.log(list);
-console.log(list.findCircular());
