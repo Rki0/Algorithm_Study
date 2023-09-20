@@ -23,19 +23,20 @@
 // }
 
 // // ES2015
-// const swap = (arr, idx1, idx2) => {
-//   [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-// };
+const swap = (arr, idx1, idx2) => {
+  [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+};
 
 // function bubbleSort(arr) {
-//   for (let i = arr.length; i > 0; i--) {
+//   for (let i = arr.length - 1; i > 0; i--) {
 //     // 한 번 순회할 때마다 연산 가장 뒤에 오는 위치는 정렬이 끝난 상태이므로 i-1까지만 연산한다.
-//     for (let j = 0; j < i - 1; j++) {
+//     for (let j = 0; j < i; j++) {
 //       // 오름차순 정렬
 //       if (arr[j] > arr[j + 1]) {
-//         let temp = arr[j];
-//         arr[j] = arr[j + 1];
-//         arr[j + 1] = temp;
+//         // let temp = arr[j];
+//         // arr[j] = arr[j + 1];
+//         // arr[j + 1] = temp;
+//         swap(arr, j, j + 1);
 //       }
 //     }
 //   }
@@ -50,19 +51,18 @@
 function bubbleSort(arr) {
   let noSwaps;
 
-  for (let i = arr.length; i > 0; i--) {
+  for (let i = arr.length - 1; i > 0; i--) {
     // 스왑 발생을 명시하는 변수를 초기화
     noSwaps = true;
 
     // 한 번 순회할 때마다 연산 가장 뒤에 오는 위치는 정렬이 끝난 상태이므로 i-1까지만 연산한다.
-    for (let j = 0; j < i - 1; j++) {
-      console.log(arr, arr[j], arr[j + 1]);
-
+    for (let j = 0; j < i; j++) {
       // 오름차순 정렬
       if (arr[j] > arr[j + 1]) {
-        let temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
+        // let temp = arr[j];
+        // arr[j] = arr[j + 1];
+        // arr[j + 1] = temp;
+        swap(arr, j, j + 1);
 
         // 스왑이 발생했다는 것을 의미
         noSwaps = false;

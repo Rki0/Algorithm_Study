@@ -57,6 +57,9 @@ class CircularLinkedList {
       this.tail = null;
     }
 
+    // pop된 node로 Linked List에 접근할 수 없도록 처리
+    current.next = null;
+
     return current;
   }
 
@@ -76,6 +79,8 @@ class CircularLinkedList {
     if (this.size === 0) {
       this.tail = null;
     }
+
+    currentHead.next = null;
 
     return currentHead;
   }
@@ -127,7 +132,7 @@ class CircularLinkedList {
   }
 
   insert(index, val) {
-    if (index < 0 || index >= this.size) {
+    if (index < 0 || index > this.size) {
       return false;
     }
 
@@ -169,33 +174,31 @@ class CircularLinkedList {
     let removed = prevNode.next;
 
     prevNode.next = removed.next;
+    removed.next = null;
 
     this.size--;
 
     return removed;
   }
 
-  findCircular() {
-    if (this.head === null) {
+  isCircular() {
+    if (!this.head) {
       return false;
     }
 
-    let rabbit = this.head.next;
     let turtle = this.head;
+    let rabbit = this.head;
 
-    while (rabbit !== null) {
+    while (turtle && rabbit && rabbit.next) {
+      turtle = turtle.next;
+      rabbit = rabbit.next.next;
+
       if (rabbit === turtle) {
-        return rabbit;
+        return true;
       }
-
-      if (rabbit.next) {
-        rabbit = rabbit.next.next;
-        turtle = turtle.next;
-        continue;
-      }
-
-      break;
     }
+
+    return false;
   }
 }
 
@@ -204,9 +207,10 @@ const list = new CircularLinkedList();
 console.log(list.push(1));
 console.log(list.push(2));
 console.log(list.push(3));
-// console.log(list.unshift(0));
+// console.log(list.shift().next);
 // console.log(list.insert(1, 4));
-console.log(list.remove(1));
-console.log(list.get(1));
+// console.log(list.remove(1));
+// console.log(list.get(1));
+console.log("cycle", list.isCircular());
 
-console.log(list);
+// console.log(list);

@@ -16,6 +16,10 @@
 // 4. If the "minimum" is not the value(index) you initially began with, swap the two values.
 // 5. Repeat this with the next element until the array is sorted.
 
+function swap(arr, idx1, idx2) {
+  [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+}
+
 function selectionSort(arr) {
   for (let i = 0; i < arr.length; i++) {
     // 순회를 시작하기 전에 임시로 최소값 설정한다.
@@ -30,9 +34,10 @@ function selectionSort(arr) {
 
     // lowest가 변경되었을 경우에만 스왑을 실행한다. 불필요한 연산을 줄이기 위함.
     if (lowest !== i) {
-      let temp = arr[i];
-      arr[i] = arr[lowest];
-      arr[lowest] = temp;
+      // let temp = arr[i];
+      // arr[i] = arr[lowest];
+      // arr[lowest] = temp;
+      swap(arr, lowest, i);
     }
   }
 

@@ -102,6 +102,9 @@ class SinglyLinkedList {
       this.tail = null;
     }
 
+    // pop된 노드에서 Linked List로 접근할 수 없도록 next를 null로 변경해준다.
+    currentHead.next = null;
+
     // 따로 저장해뒀던 기존 head를 반환한다.
     return currentHead;
   }
@@ -206,6 +209,9 @@ class SinglyLinkedList {
 
     prevNode.next = removed.next;
 
+    // 제거된 node의 next로 Linked List에 접근할 수 없도록 만든다.
+    removed.next = null;
+
     this.length--;
 
     return removed;
@@ -247,6 +253,7 @@ class SinglyLinkedList {
 const list = new SinglyLinkedList();
 list.push("hello");
 list.push("goodbye");
+list.push("hi");
 
-console.log(list.remove(0));
+console.log(list.remove(1).next);
 console.log(list);

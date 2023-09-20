@@ -169,7 +169,7 @@ class DoublyLinkedList {
     // get()을 통해 index의 node를 얻는다.
     let foundNode = this.get(index);
 
-    if (!node) {
+    if (!foundNode) {
       return false;
     }
 
@@ -222,11 +222,11 @@ class DoublyLinkedList {
     }
 
     if (index === 0) {
-      return this.shift(index);
+      return this.shift();
     }
 
     if (index === this.length - 1) {
-      return this.pop(index);
+      return this.pop();
     }
 
     // 삭제하고자하는 index의 node를 얻는다.
@@ -259,8 +259,8 @@ class DoublyLinkedList {
 }
 
 let node = new DoublyLinkedList();
-console.log(node);
 console.log(node.push(99));
-console.log(node.push(100));
-console.log(node.push(101));
-console.log(node.set(1, 500));
+console.log(node.shift());
+// console.log(node.push(100));
+// console.log(node.push(101));
+// console.log(node.set(1, 500));

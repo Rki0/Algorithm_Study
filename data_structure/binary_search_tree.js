@@ -70,79 +70,79 @@ class BinarySearchTree {
   //   }
   // }
 
-  // insert - iteratevely version 2
-  insert(val) {
-    let newNode = new Node(val);
-
-    if (!this.root) {
-      this.root = newNode;
-      return this;
-    }
-
-    let current = this.root;
-
-    while (current) {
-      if (val === current.val) {
-        return undefined;
-      }
-
-      if (val < current.val) {
-        if (!current.left) {
-          current.left = newNode;
-          return this;
-        }
-
-        current = current.left;
-        continue;
-      }
-
-      if (val > current.val) {
-        if (!current.right) {
-          current.right = newNode;
-          return this;
-        }
-
-        current = current.right;
-        continue;
-      }
-    }
-  }
-
-  // insert - recursively version
+  // // insert - iteratevely version 2
   // insert(val) {
-  //   const newNode = new Node(val);
+  //   let newNode = new Node(val);
 
   //   if (!this.root) {
   //     this.root = newNode;
   //     return this;
   //   }
 
-  //   this.insertNode(this.root, newNode);
-  // }
+  //   let current = this.root;
 
-  // insertNode(node, newNode) {
-  //   if (newNode.val === node.val) {
-  //     return undefined;
-  //   }
-
-  //   if (newNode.val < node.val) {
-  //     if (!node.left) {
-  //       node.left = newNode;
-  //       return this;
+  //   while (current) {
+  //     if (val === current.val) {
+  //       return undefined;
   //     }
 
-  //     this.insertNode(node.left, newNode);
-  //   }
+  //     if (val < current.val) {
+  //       if (!current.left) {
+  //         current.left = newNode;
+  //         return this;
+  //       }
 
-  //   if (newNode.val > node.val) {
-  //     if (!node.right) {
-  //       node.right = newNode;
-  //       return this;
+  //       current = current.left;
+  //       continue;
   //     }
 
-  //     this.insertNode(node.right, newNode);
+  //     if (val > current.val) {
+  //       if (!current.right) {
+  //         current.right = newNode;
+  //         return this;
+  //       }
+
+  //       current = current.right;
+  //       continue;
+  //     }
   //   }
   // }
+
+  // insert - recursively version
+  insert(val) {
+    const newNode = new Node(val);
+
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+    }
+
+    this.insertNode(this.root, newNode);
+  }
+
+  insertNode(node, newNode) {
+    if (newNode.val === node.val) {
+      return undefined;
+    }
+
+    if (newNode.val < node.val) {
+      if (!node.left) {
+        node.left = newNode;
+        return this;
+      }
+
+      return this.insertNode(node.left, newNode);
+    }
+
+    if (newNode.val > node.val) {
+      if (!node.right) {
+        node.right = newNode;
+        return this;
+      }
+
+      return this.insertNode(node.right, newNode);
+    }
+  }
 
   // find - iteratively version 1
   // find(val) {
@@ -185,28 +185,53 @@ class BinarySearchTree {
   // }
 
   // find - iteratively version 2
+  // find(val) {
+  //   if (!this.root) {
+  //     return undefined;
+  //   }
+
+  //   let current = this.root;
+
+  //   while (current) {
+  //     if (val < current.val) {
+  //       current = current.left;
+  //       continue;
+  //     }
+
+  //     if (val > current.val) {
+  //       current = current.right;
+  //       continue;
+  //     }
+
+  //     return current;
+  //   }
+
+  //   return undefined;
+  // }
+
+  // find - recursive version
   find(val) {
     if (!this.root) {
       return undefined;
     }
 
-    let current = this.root;
+    return this.findNode(val, this.root);
+  }
 
-    while (current) {
-      if (val < current.val) {
-        current = current.left;
-        continue;
-      }
-
-      if (val > current.val) {
-        current = current.right;
-        continue;
-      }
-
-      return current;
+  findNode(val, node) {
+    if (!node) {
+      return undefined;
     }
 
-    return undefined;
+    if (val < node.val) {
+      return this.findNode(val, node.left);
+    }
+
+    if (val > node.val) {
+      return this.findNode(val, node.right);
+    }
+
+    return node;
   }
 
   // find()를 활용해서 만든 Tree가 특정 값을 가지고 있는지 확인하는 메서드
@@ -331,18 +356,24 @@ class BinarySearchTree {
 
     return data;
   }
+
+  delete(val) {}
 }
 
 let tree = new BinarySearchTree();
-tree.insert(10);
-tree.insert(6);
-tree.insert(15);
-tree.insert(3);
-tree.insert(8);
-tree.insert(20);
+console.log(tree.insert(10));
+console.log(tree.insert(6));
+console.log(tree.insert(15));
+console.log(tree.insert(3));
+console.log(tree.insert(8));
+console.log(tree.insert(20));
+console.log(tree.insert(10));
 
-console.log(tree);
-console.log(tree.find(10));
+console.log("tree", tree);
+// console.log(tree.find(10));
+// console.log(tree.find(6));
+// console.log(tree.find(15));
+// console.log(tree.find(1));
 console.log(tree.BFS());
 console.log(tree.DFSPreOrder());
 console.log(tree.DFSPostOrder());

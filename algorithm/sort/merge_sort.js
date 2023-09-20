@@ -18,7 +18,7 @@
 // 1. Create an empty array, take a look at the smallest values in each input array
 // 2. While there are still values we haven't looked at...
 // 2-1. If the value in the first array is smaller than the value in the second array, push the value in the first array into our results and move on to the next value in the first array.
-// 2-2. If the value in the first array is larget than the value in the second array, push the value in the second array into our results and move on to the next value in the second array.
+// 2-2. If the value in the first array is larger than the value in the second array, push the value in the second array into our results and move on to the next value in the second array.
 // 2-3. Once we exhaust one array, push in all remaining values from the other array.
 // 정렬된 두 개의 배열을 입력받는다는 것이 전제!
 function merge(arr1, arr2) {

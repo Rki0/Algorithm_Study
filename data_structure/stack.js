@@ -37,9 +37,14 @@ class Stack {
     this.first = null;
     this.last = null;
     this.size = 0;
+    this.maxLength = 3;
   }
 
   push(val) {
+    if (this.isFull()) {
+      throw new Error("Stack Overflow");
+    }
+
     let newNode = new Node(val);
 
     if (!this.first) {
@@ -62,8 +67,12 @@ class Stack {
 
   pop() {
     // 아무것도 없는 stack은 undefined를 반환
-    if (!this.first) {
-      return undefined;
+    // if (!this.first) {
+    //   return undefined;
+    // }
+
+    if (this.isEmpty()) {
+      throw new Error("Stack Underflow");
     }
 
     // pop될 node를 설정한다.
@@ -87,15 +96,33 @@ class Stack {
 
     return popedNode;
   }
+
+  isFull() {
+    if (this.size === this.maxLength) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isEmpty() {
+    if (this.size === 0) {
+      return true;
+    }
+
+    return false;
+  }
 }
 
 let stack = new Stack();
 console.log(stack);
 console.log(stack.push(1));
 console.log(stack.push(2));
-// console.log(stack.push(3));
-console.log(stack);
+console.log(stack.push(3));
+// console.log(stack.push(4));
+console.log(stack.isFull());
 console.log(stack.pop());
-console.log(stack);
 console.log(stack.pop());
-console.log(stack);
+console.log(stack.pop());
+// console.log(stack.pop());
+console.log(stack.isEmpty());

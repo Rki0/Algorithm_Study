@@ -46,11 +46,13 @@ function pivot(arr, start = 0, end = arr.length + 1) {
       // arr[i] = arr[swapIdx];
       // arr[swapIdx] = temp;
       swap(arr, swapIdx, i);
+      console.log(pivot, arr);
     }
   }
 
   // pivot을 swapIndex에 있는 값과 바꾼다.
   swap(arr, start, swapIdx);
+  console.log("pivot swap", arr);
 
   // pivot이 정렬 상태에서 있어야할 자리인 swapIdx를 반환
   return swapIdx;
